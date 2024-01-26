@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
@@ -25,6 +26,8 @@ public class Event {
     private String description;
     private String location;
     private LocalDate date;
+    private int maxOccupation;
+    private String image;
 
     @OneToMany(mappedBy = "events")
     private List<User> users;
