@@ -24,7 +24,7 @@ public class User {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id")
+            inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<Event> events;
 }

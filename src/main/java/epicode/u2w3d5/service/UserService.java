@@ -9,6 +9,7 @@ import epicode.u2w3d5.repository.UserDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,6 +17,10 @@ public class UserService {
 
     @Autowired
     private UserDAO userDAO;
+
+    public List<User> getUsers() {
+        return userDAO.findAll();
+    }
 
     public NewUserResponse save(NewUserDTO user) {
         userDAO.findByEmail(user.email()).ifPresent(found -> {

@@ -26,6 +26,6 @@ public class Event {
     private String location;
     private LocalDate date;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "events")
     private List<User> users;
 }
