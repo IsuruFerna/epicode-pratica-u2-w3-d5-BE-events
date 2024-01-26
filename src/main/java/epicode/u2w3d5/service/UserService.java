@@ -1,5 +1,6 @@
 package epicode.u2w3d5.service;
 
+import epicode.u2w3d5.entities.Role;
 import epicode.u2w3d5.entities.User;
 import epicode.u2w3d5.exceptions.BadRequestException;
 import epicode.u2w3d5.exceptions.NotFoundException;
@@ -31,6 +32,7 @@ public class UserService {
         u.setFirstname(user.firstName());
         u.setSurname(user.lastName());
         u.setPassword(user.password());
+        u.setRole(Role.USER);
         return new NewUserResponse(u.getId());
     }
 
