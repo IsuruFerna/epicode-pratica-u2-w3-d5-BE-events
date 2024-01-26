@@ -20,11 +20,8 @@ public class UserService {
     private UserDAO userDAO;
 
     public Page<User> getUsers(int page, int size, String orderBy) {
-        // return usersDAO.findAll();
         if (size >= 100) size = 100;
-        Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy)); // Di default l'ordine è ascendente
-        // Se volessimo cambiare l'ordine si usa Sort.Direction.DESC
-        // Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, orderBy));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
         return userDAO.findAll(pageable);
     }
 

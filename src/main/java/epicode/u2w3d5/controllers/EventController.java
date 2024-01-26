@@ -7,6 +7,7 @@ import epicode.u2w3d5.payload.event.NewEventResponse;
 import epicode.u2w3d5.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +30,10 @@ public class EventController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     public NewEventResponse saveEvent(@RequestBody @Validated NewEventDTO body, BindingResult validation) {
         if(validation.hasErrors()) {
-            System.out.println("-----------------------end erros");
             throw new BadRequestException(validation.getAllErrors());
         }
 
@@ -47,18 +48,21 @@ public class EventController {
     }
 
     @PutMapping("/{eventId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     public Event findAndUpdate(@PathVariable UUID eventID, @RequestBody Event body) {
         return eventService.findByIdAndUpdate(eventID, body);
     }
 
     @DeleteMapping("/{eventId}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void findAndDelete(@PathVariable UUID eventId) {
         eventService.findByIdAndDelete(eventId);
     }
 
     @PatchMapping("/{eventId}/image")
+    @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     public Event uploadImage(@RequestParam("image")MultipartFile file, @PathVariable UUID eventId) {
         try {
