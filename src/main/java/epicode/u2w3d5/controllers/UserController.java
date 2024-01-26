@@ -1,6 +1,9 @@
 package epicode.u2w3d5.controllers;
 
+import epicode.u2w3d5.entities.Event;
 import epicode.u2w3d5.entities.User;
+import epicode.u2w3d5.exceptions.NotFoundException;
+import epicode.u2w3d5.payload.user.UserResponseDTO;
 import epicode.u2w3d5.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,8 +40,14 @@ public class UserController {
     // **************** USER SELF ACCESS ********************
 
     @GetMapping("/me")
-    public User getProfile(@AuthenticationPrincipal User currentUser) {
-        return currentUser;
+    public UserResponseDTO getProfile(@AuthenticationPrincipal User currentUser)
+    {
+        User user = userService.findById(currentUser.getId());
+        return new UserResponseDTO(
+                currentUser.getFirstname(),
+                currentUser.getSurname(),
+                currentUser.getEmail(),
+                user.getEvents());
     }
 
     @PutMapping("/me")
