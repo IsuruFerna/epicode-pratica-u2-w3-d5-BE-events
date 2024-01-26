@@ -19,6 +19,7 @@ public class User {
     private String surname;
     private Role role;
     private String email;
+    private String password;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(

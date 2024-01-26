@@ -1,4 +1,4 @@
-package epicode.u2w3d5.payload.user;
+package epicode.u2w3d5.payload;
 
 import java.time.LocalDateTime;
 

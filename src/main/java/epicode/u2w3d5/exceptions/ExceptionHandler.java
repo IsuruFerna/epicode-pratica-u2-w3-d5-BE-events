@@ -1,6 +1,6 @@
 package epicode.u2w3d5.exceptions;
 
-import epicode.u2w3d5.payload.user.ErrorsDTO;
+import epicode.u2w3d5.payload.ErrorsDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ResponseStatus;
