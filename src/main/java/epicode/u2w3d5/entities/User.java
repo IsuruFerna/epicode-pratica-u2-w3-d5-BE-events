@@ -3,6 +3,7 @@ package epicode.u2w3d5.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -17,8 +18,13 @@ public class User {
     private String firstname;
     private String surname;
     private Role role;
+    private String email;
+    private String password;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id")
-    private Event event;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id")
+    )
+    private List<Event> events;
 }
