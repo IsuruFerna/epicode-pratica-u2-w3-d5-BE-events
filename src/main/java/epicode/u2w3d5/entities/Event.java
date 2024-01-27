@@ -1,5 +1,6 @@
 package epicode.u2w3d5.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonIgnoreProperties({"users"})
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -29,6 +31,6 @@ public class Event {
     private int maxOccupation;
     private String image;
 
-    @OneToMany(mappedBy = "events")
+    @ManyToMany(mappedBy = "events")
     private List<User> users;
 }
