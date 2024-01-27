@@ -10,7 +10,6 @@ import java.util.List;
 public record UserResponseDTO(
         String firstName,
         String surname,
-        String email,
-        List<Event> events
+        String email
 ) {
 }

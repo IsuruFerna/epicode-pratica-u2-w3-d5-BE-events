@@ -16,7 +16,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@JsonIgnoreProperties({"password", "authorities", "accountNonExpired", "enabled", "accountNonLocked", "credentialsNonExpired"})
+@JsonIgnoreProperties({"password", "authorities", "accountNonExpired", "enabled", "accountNonLocked", "credentialsNonExpired", "events"})
+@Table(name = "users")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -34,6 +35,12 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "event_id")
     )
     private List<Event> events;
+
+    public void addEvent(Event event) {
+        this.events.add(event);
+    }
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

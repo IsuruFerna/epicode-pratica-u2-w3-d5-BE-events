@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +22,9 @@ public class EventService {
 
     @Autowired
     private EventDAO eventDAO;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private Cloudinary cloudinaryUploader;
@@ -40,6 +44,16 @@ public class EventService {
     public List<Event> getEvents() {
         return eventDAO.findAll();
     }
+
+    public List<Event> findEventsByUsers(User user) {
+        return eventDAO.findEventsByUsers(user);
+    }
+
+    public List<Event> getUserEvents(User user) {
+        return eventDAO.userEvents(user.getId());
+    }
+
+
 
     public Event findById(UUID id) {
         return eventDAO.findById(id).orElseThrow(() -> new NotFoundException(id));
